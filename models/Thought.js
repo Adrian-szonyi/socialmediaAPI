@@ -11,10 +11,7 @@ const thoughtSchema = new Schema({
       get: (createdAtTime) =>
       moment(createdAtTime).format("MMM DD, YYYY [at] hh:mm a"), },
     username: { type: String, required: true, default: userSchema.username },
-    reactions: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Reaction',
-    },]
+    reactions: [reactionSchema],
     },
   {
     toJSON: {
