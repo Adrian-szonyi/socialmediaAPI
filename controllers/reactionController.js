@@ -8,7 +8,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  deleteFriend(req, res) {
+  deleteReaction(req, res) {
     Reaction.findOneAndRemove({ _id: req.params.reactionId })
       .then((reaction) =>
         !reaction
