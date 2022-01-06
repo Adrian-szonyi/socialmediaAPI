@@ -29,7 +29,6 @@ module.exports = {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
-      { runValidators: true, new: true }
     )
       .then((thought) =>
         !thought

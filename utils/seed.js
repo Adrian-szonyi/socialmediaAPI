@@ -12,75 +12,61 @@ connection.once('open', async () => {
   // Drop existing Thoughts
   await Thought.deleteMany({});
 
+  await Reaction.deleteMany({});
+
   // Add courses to the collection and await the results
   await Thought.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    thoughtText: 'TESTESTEST',
+    createdAt: '21/02/2021',
+    username: 'ANLJDNL',
   });
   await Thought.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
-  });
-
-  await Thought.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    thoughtText: 'TESTEasaaaaaSTEST',
+    createdAt: '21/02/2021',
+    username: 'ANLJDNL',
   });
 
   await Thought.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    thoughtText: 'TESTESTsfasfasfasfEST',
+    createdAt: '21/02/2021',
+    username: 'ANLJDNdfsL',
   });
 
   await Thought.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    thoughtText: 'TESTEssssssssssSTEST',
+    createdAt: '21/02/2021',
+    username: 'ANLJDasdaNL',
+  });
+
+  await Reaction.collection.insertOne({
+    reactionBody: 'UCasdasdLAa',
+    username: 'ANLJDNL',
+  });
+  await Reaction.collection.insertOne({
+    reactionBody: 'UCasdasdLAa',
+    username: 'ANLJDasdaNL',
   });
 
   await User.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    username: 'UasdasadassdaCLA',
+    email: 'asdnldfsdajs@gmail.com'
   });
 
   await User.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    username: 'ANLJDNL',
+    email: 'asdasnddddlajs@gmail.com'
   });
-
   await User.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+    username: 'ANLJDasdaNL',
+    email: 'assddddssdnlajs@gmail.com'
   });
-  await Reaction.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+  await User.collection.insertOne({
+    username: 'ANLJDNdfsL',
+    email: 'asdssssnlajs@gmail.com'
   });
-
-  await Reaction.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
-  });
-
-  await Reaction.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
-  });
-
-  await Reaction.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    students: [...students],
+  await User.collection.insertOne({
+    username: 'UasdasdaCLA',
+    email: 'asdnaaalasdsjs@gmail.com'
   });
 
 

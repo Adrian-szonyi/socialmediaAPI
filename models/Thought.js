@@ -1,13 +1,16 @@
-const mongoose = require('mongoose');
-const reactionSchema = require('./Reaction');
+const { Schema, model } = require('mongoose');
+const { reactionSchema } = require('./Reaction');
 const userSchema = require('./User');
 // Schema to create User model
 
-const thoughtSchema = new mongoose.Schema({
+const thoughtSchema = new Schema({
     thoughtText: { type: String, required: true, minlength: 1, maxlength: 280  },
     createdAt: { type: Date, default: Date.now() },
     username: { type: String, required: true, default: userSchema.username },
-    reactions: [reactionSchema]
+    reactions: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Reaction',
+    },]
     },
   {
     toJSON: {
