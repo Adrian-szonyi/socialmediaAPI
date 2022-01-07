@@ -15,6 +15,15 @@ connection.once('open', async () => {
   await Reaction.deleteMany({});
 
   // Add courses to the collection and await the results
+  await Reaction.collection.insertOne({
+    reactionBody: 'UCasdasdLAa',
+    username: 'ANLJDNL',
+  });
+  await Reaction.collection.insertOne({
+    reactionBody: 'UCasdasdLAa',
+    username: 'ANLJDasdaNL',
+  });
+
   await Thought.collection.insertOne({
     thoughtText: 'TESTESTEST',
     createdAt: '21/02/2021',
@@ -35,15 +44,6 @@ connection.once('open', async () => {
   await Thought.collection.insertOne({
     thoughtText: 'TESTEssssssssssSTEST',
     createdAt: '21/02/2021',
-    username: 'ANLJDasdaNL',
-  });
-
-  await Reaction.collection.insertOne({
-    reactionBody: 'UCasdasdLAa',
-    username: 'ANLJDNL',
-  });
-  await Reaction.collection.insertOne({
-    reactionBody: 'UCasdasdLAa',
     username: 'ANLJDasdaNL',
   });
 

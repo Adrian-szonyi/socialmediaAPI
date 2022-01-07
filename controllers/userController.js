@@ -18,23 +18,18 @@ module.exports = {
   // create a new user
   createUser(req, res) {
     User.create(req.body)
-      .then((dbUserData) => res.json(dbUserData))
+      .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
   deleteSingleUser(req, res) {
       User.findOneAndRemove({ _id: req.params.userId })
       .then((user) => {
-        Thought.deleteMany({ username: UserData.username })
+        Thought.deleteMany({ username: req.params.username })
           .then(() => {
             res.status(200).json({
               message: "User deleted successfully",
             });
           })
-          .catch(() => {
-            res.status(500).json({
-              message: "An error occured when deleting thoughts",
-            });
-          });
       !user
           ? res.status(404).json({ message: 'No user with this id!' })
           : User.findOneAndUpdate(

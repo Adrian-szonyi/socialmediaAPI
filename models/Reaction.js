@@ -7,6 +7,10 @@ const reactionSchema = new Schema(
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
+  thoughtId: {
+  type: String,
+  required: true,
+    },
     reactionBody: {
       type: String,
       required: true,

@@ -1,31 +1,27 @@
 const { Reaction } = require('../models');
+const { Thought } = require('../models')
 
 module.exports = {
-  // create a new Friend
   createReaction(req, res) {
     Reaction.create(req.body)
-      .then((reaction) => res.json(reaction))
-      .catch((err) => res.status(500).json(err));
+      .then((reaction) => res.json(reaction)).then(() => 
+      Thought.findByIdAndUpdate(
+        { _id: req.params.thoughtId },
+        { $push: { reactions: req.body } },
+        { new: true }
+      ))
+      .catch((err) => res.status(500).json(err))
   },
 
   deleteReaction(req, res) {
-    Reaction.findOneAndRemove({ _id: req.params.reactionId })
-      .then((reaction) =>
-        !reaction
-          ? res.status(404).json({ message: 'No reaction with this id!' })
-          : Reaction.findOneAndUpdate(
-              { users: req.params.reactionId },
-              { $pull: { thoughts: req.params.reactionId } },
-              { new: true }
-            )
+    Reaction.findByIdAndRemove({ _id: req.params.reactionId })
+    .then(() =>
+    Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: req.body } },
+        { new: true }
       )
-      .then((user) =>
-        !user
-          ? res.status(404).json({
-              message: 'no user with this id!',
-            })
-          : res.json({ message: 'reaction successfully deleted!' })
-      )
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => res.status(500).json(err))
+    )
   },
 };
