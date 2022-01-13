@@ -14,14 +14,24 @@ module.exports = {
   },
 
   deleteReaction(req, res) {
-    Reaction.findByIdAndRemove({ _id: req.params.reactionId })
-    .then(() =>
-    Thought.findOneAndUpdate(
-        { _id: req.params.thoughtId },
-        { $pull: { reactions: req.body } },
-        { new: true }
-      )
-      .catch((err) => res.status(500).json(err))
-    )
+       Reaction.findOneAndRemove(req.body).then(
+         () => {
+           Thought.findByIdAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: req.body } },
+            { new: true }
+           )
+           .catch((err) => res.status(500).json(err))
+         }
+       )
+
+    // Reaction.findOneAndRemove(req.body).then(
+    // Thought.findByIdAndUpdate(
+    //     { _id: req.params.thoughtId },
+    //     { $pull: { reactions: req.body } },
+    //     { new: true }
+    //   )
+    //   .catch((err) => res.status(500).json(err))
+     
   },
 };

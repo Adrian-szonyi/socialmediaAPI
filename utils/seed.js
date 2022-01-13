@@ -13,7 +13,7 @@ connection.once('open', async () => {
   await Thought.deleteMany({});
 
   await Reaction.deleteMany({});
-
+s
   // Add courses to the collection and await the results
   await Reaction.collection.insertOne({
     reactionBody: 'UCasdasdLAa',
