@@ -3,35 +3,48 @@ const { Thought } = require('../models')
 
 module.exports = {
   createReaction(req, res) {
-    Reaction.create(req.body)
-      .then((reaction) => res.json(reaction)).then(() => 
-      Thought.findByIdAndUpdate(
-        { _id: req.params.thoughtId },
-        { $push: { reactions: req.body } },
-        { new: true }
-      ))
-      .catch((err) => res.status(500).json(err))
+    Reaction.create(req.body).then(
+      (reactionResult) => {
+        Thought.findByIdAndUpdate(
+          { _id: req.params.thoughtId },
+          { $push: { reactions: req.body } },
+          { new: true }
+        ).then((thoughtResult) => {
+          return res.json(reactionResult);
+        }).catch((thoughtError) => {
+          console.log("error updating thought");
+          console.log(thoughtError);
+          
+        })
+      }
+    ).catch((reactionError) => {
+      console.log("error updating reaction");
+      console.log(reactionError);
+      return res.json(reactionError);
+    })
   },
 
   deleteReaction(req, res) {
-       Reaction.findOneAndRemove(req.body).then(
-         () => {
-           Thought.findByIdAndUpdate(
-            { _id: req.params.thoughtId },
-            { $pull: { reactions: req.body } },
-            { new: true }
-           )
-           .catch((err) => res.status(500).json(err))
-         }
-       )
+    console.log(req.params.reactionId);
 
-    // Reaction.findOneAndRemove(req.body).then(
-    // Thought.findByIdAndUpdate(
-    //     { _id: req.params.thoughtId },
-    //     { $pull: { reactions: req.body } },
-    //     { new: true }
-    //   )
-    //   .catch((err) => res.status(500).json(err))
-     
+    Thought.findOneAndUpdate(
+      {_id: req.params.thoughtId},
+      {$pull: { reactions: { reactionId: req.params.reactionId } }},
+      { runValidators: true, new: true }
+      ).then(
+      (result) => {
+
+        return res.json({
+          message: result
+        });
+
+      }
+    ).catch(error => {
+      console.log("error");
+      console.log(error);
+      res.json({
+        message: error
+      });
+    });
   },
-};
+}
